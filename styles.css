@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 main {
@@ -10,19 +11,83 @@ main {
     padding-top: 150px;
     display: flex;
     justify-content: center;
+    background-color: #202124;
 }
 
-table, tr, td {
-    border: 1px solid #000;
+table {
+    border: 1px solid #f1f3f4;
+    border-radius: 5px;
 }
 
 td {
-    width: 75px;
+    width: 85px;
     height: 50px;
     text-align: center;
     cursor: pointer;
+    border-radius: 5px;
 }
 
-#display {
+.display {
     cursor: default;
+    background-color:#202124;
+    color: #f1f3f4;
+}
+
+#main-display {
+    font-size: 2em;
+    text-align: right;
+    padding-right: 22%;
+}
+
+#temp-display {
+    font-size: 1.5em;
+    text-align: right;
+    padding: 5px;
+}
+
+.number {
+    background: #f1f3f4;
+    color: #202124;
+    border: 1px solid #f1f3f4;
+}
+
+.number:hover {
+    background: #f8f9fa;
+    border-color: #f8f9fa;
+}
+
+.operator {
+    background: #dadce0;
+    color: #202124;
+    border: 1px solid #dadce0;
+    font-weight: bold;
+}
+
+.operator:hover {
+    background: #e7e9ee;
+    border-color: #e7e9ee;
+}
+
+#operation {
+    background: #4285f4;
+    color: #fff;
+    border: 1px solid #4285f4;
+    font-weight: bold;
+}
+
+#operation:hover {
+    background: #5390f1;
+    border-color: #5390f1;
+}
+
+#clear {
+    background: #f44842;
+    color: #fff;
+    border: 1px solid #f44842;
+    text-transform: uppercase;
+}
+
+#clear:hover {
+    background: #f15752;
+    border-color: #f15752;
 }

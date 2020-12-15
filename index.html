@@ -10,121 +10,41 @@
     <main>
         <table>
             <tr>
-                <td colspan="4" id="display"></td>
+                <td colspan="3" id="main-display" class="display"></td>
+                <td id="temp-display" class="display"></td>
             </tr>
 
             <tr>
                 <td class="number">7</td>
                 <td class="number">8</td>
                 <td class="number">9</td>
-                <td id="division">/</td>
+                <td id="division" class="operator">/</td>
             </tr>
 
             <tr>
                 <td class="number">4</td>
                 <td class="number">5</td>
                 <td class="number">6</td>
-                <td id="multiplication">*</td>
+                <td id="multiplication" class="operator">*</td>
             </tr>
 
             <tr>
                 <td class="number">1</td>
                 <td class="number">2</td>
                 <td class="number">3</td>
-                <td id="subtraction">-</td>
+                <td id="subtraction" class="operator">-</td>
             </tr>
 
             <tr>
                 <td class="number">0</td>
-                <td>Clear</td>
+                <td id="clear">Clear</td>
                 <td id="operation">=</td>
-                <td id="addition">+</td>
+                <td id="addition" class="operator">+</td>
             </tr>
         </table>
     </main>
     
 
-    <script>
-        function add(a, b) {
-            return a + b;
-        }
-
-        function subtract(a, b) {
-            return a - b;
-        }
-
-        function multiply(a, b) {
-            return a * b;
-        }
-
-        function devide(a, b) {
-            return a / b;
-        }
-
-        function operate(operator, a, b) {
-            switch (operator) {
-                case "plus":
-                    return add(a, b);
-                    break;
-
-                case "minus":
-                    return subtract(a, b);
-                    break;
-
-                case "multiplier":
-                    return multiply(a, b);
-                    break;
-
-                case "divider":
-                    return devide(a, b);
-                    break;
-            }
-
-        }
-
-        const display = document.querySelector("#display");
-        const numbers = Array.from(document.querySelectorAll(".number"));
-        const addition = document.querySelector("#addition");
-        const subtraction = document.querySelector("#subtraction");
-        const multiplication = document.querySelector("#multiplication");
-        const division = document.querySelector("#divison");
-        const operation = document.querySelector("#operation");
-
-        let displayValue;
-        let a;
-        let b;
-        const regex = /[0-9]+/;
-
-
-        window.addEventListener("click", (e) => {
-            if (e.target.className == "number") {
-                if (!(regex.test(display.textContent))) {
-                    display.textContent = "";
-                    console.log("working");
-                }
-
-                display.textContent += e.target.textContent + " ";
-                displayValue = display.textContent;
-                console.log(displayValue);
-            }
-
-            a = Number(displayValue[0]);
-            b = Number(displayValue[2]);
-        });
-
-        addition.addEventListener("click", () => {
-            display.textContent = "Enter two numbers:";
-        });
-
-        operation.addEventListener("click", () => {
-            display.textContent = "";
-            result = operate("plus", a, b);
-            display.textContent = result;
-        });
-
-        window.addEventListener("click", (e) => {
-            //console.log(typeof e.target.textContent);
-        });
-    </script>
+    <script src="main.js"></script>
 </body>
 </html>
