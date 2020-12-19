@@ -65,14 +65,27 @@ function onClickOperator(operatorSign) {
     operator = operatorSign.id;
 }
 
-const mainDisplay = document.querySelector("#main-display");
-const tempDisplay = document.querySelector("#temp-display");
+function clearData() {
+    mainDisplay.textContent = "0";
+    tempDisplay.textContent = "";
+    a = undefined;
+    b = undefined;
+    result = undefined;
+}
+
+/* 
+FUNCTION BREAKPOINT
+*/
+
+const mainDisplay = document.querySelector(".main-display");
+const tempDisplay = document.querySelector(".temp-display");
 const numbers = Array.from(document.querySelectorAll(".number"));
 const operators = Array.from(document.querySelectorAll(".operator"))
 const operation = document.querySelector("#operation");
 const clear = document.querySelector("#clear");
+const datas = Array.from(document.querySelectorAll("td"));
 
-const regex = /[0-9]+/;
+const regex = /[A-z]+/;
 let a;
 let b;
 let result;
@@ -83,11 +96,20 @@ mainDisplay.textContent = "0";
 
 numbers.forEach(number => {
     number.addEventListener("click", () => {
-        if (a == undefined) {
+        if (regex.test(mainDisplay.textContent)) {
+            mainDisplay.classList.remove("mainText");
+            clearData();
+        }
+
+        if (mainDisplay.textContent.startsWith("0") ||
+            mainDisplay.textContent == result) {
             mainDisplay.textContent = "";
-        } 
-        mainDisplay.textContent += number.textContent;
-        displayValue = mainDisplay.textContent;
+        }
+
+        if (mainDisplay.textContent.length < 13) {
+            mainDisplay.textContent += number.textContent;
+            displayValue = mainDisplay.textContent;
+        }
     })
 });
 
@@ -116,21 +138,46 @@ operators.forEach(operator => {
 });
 
 operation.addEventListener("click", () => {
-    tempDisplay.textContent = "";
-    b = Number(displayValue);
-    result = operate(operator, a, b);
-    mainDisplay.textContent = roundToTwo(result);
-    a = result;
+    if (mainDisplay.textContent == "0" && 
+    a == undefined && b == undefined) {
+        mainDisplay.textContent = "0";
+    } else {
+        tempDisplay.textContent = "";
+        b = Number(displayValue);
+        result = operate(operator, a, b);
+
+        
+
+        if (result.toString().length < 13) {
+            if (result == "Infinity") {
+                mainDisplay.classList.add("mainText");
+                mainDisplay.textContent = "Risky bussines you'r trying there...";
+            } else {
+                mainDisplay.textContent = roundToTwo(result);
+                a = result;
+            }
+        } else {
+            mainDisplay.textContent = "Too big of a number...";
+        }
+    }
 });
 
 clear.addEventListener("click", () => {
-    mainDisplay.textContent = "0";
-    tempDisplay.textContent = "";
-    a = undefined;
-    b = undefined;
-    result = undefined;
+    clearData();
 });
 
 window.addEventListener("click", (e) => {
-    //console.log(typeof e.target.textContent);
+    datas.forEach(data => {
+        if (data.classList.contains("pressed")) {
+            data.classList.remove("pressed");
+        }
+    });
+
+    if (e.target.tagName === "TD") {
+        e.target.classList.add("pressed");
+    }
 });
+
+/* window.addEventListener("click", (e) => {
+    console.log(typeof e.target.tagName);
+}); */
