@@ -84,6 +84,7 @@ const operators = Array.from(document.querySelectorAll(".operator"))
 const operation = document.querySelector("#operation");
 const clear = document.querySelector("#clear");
 const datas = Array.from(document.querySelectorAll("td"));
+const changeOperator = document.querySelector("#change-operator");
 
 const regex = /[A-z]+/;
 let a;
@@ -94,8 +95,22 @@ let operator;
 
 mainDisplay.textContent = "0";
 
+window.addEventListener("click", (e) => {
+    datas.forEach(data => {
+        if (data.classList.contains("pressed")) {
+            data.classList.remove("pressed");
+        }
+    });
+
+    if (e.target.tagName === "TD") {
+        e.target.classList.add("pressed");
+    }
+});
+
 numbers.forEach(number => {
     number.addEventListener("click", () => {
+        
+
         if (regex.test(mainDisplay.textContent)) {
             mainDisplay.classList.remove("mainText");
             clearData();
@@ -107,7 +122,11 @@ numbers.forEach(number => {
         }
 
         if (mainDisplay.textContent.length < 13) {
-            mainDisplay.textContent += number.textContent;
+            if (number.id === "change-operator") {
+                mainDisplay.textContent = -mainDisplay.textContent;
+            } else {
+                mainDisplay.textContent += number.textContent;
+            }
             displayValue = mainDisplay.textContent;
         }
     })
@@ -164,18 +183,6 @@ operation.addEventListener("click", () => {
 
 clear.addEventListener("click", () => {
     clearData();
-});
-
-window.addEventListener("click", (e) => {
-    datas.forEach(data => {
-        if (data.classList.contains("pressed")) {
-            data.classList.remove("pressed");
-        }
-    });
-
-    if (e.target.tagName === "TD") {
-        e.target.classList.add("pressed");
-    }
 });
 
 /* window.addEventListener("click", (e) => {
